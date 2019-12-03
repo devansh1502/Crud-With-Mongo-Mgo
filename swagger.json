@@ -1,0 +1,236 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "The purpose of this application is to store and retrieve order",
+    "title": "RestApiOrder",
+    "contact": {
+      "name": "Devansh",
+      "email": "devanshgupta1502@gmail.com"
+    },
+    "version": "0.0.1"
+  },
+  "basePath": "/api",
+  "paths": {
+    "/result": {
+      "get": {
+        "description": "This method Retrieves the full list of Orders.",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get Orders",
+        "operationId": "getOrders",
+        "responses": {
+          "200": {
+            "description": "order response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden, you are not allowed to undertake this operation"
+          },
+          "405": {
+            "description": "Method Not Allowed, likely url is not correct"
+          }
+        }
+      },
+      "post": {
+        "description": "Save Orders",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Post Orders",
+        "operationId": "postOrders",
+        "parameters": [
+          {
+            "description": "orders to create data",
+            "name": "order",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Orders response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "403": {
+            "description": "Forbidden, you are not allowed to undertake this operation"
+          },
+          "405": {
+            "description": "Method Not Allowed, likely url is not correct"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/result/{id}": {
+      "get": {
+        "description": "This method retrieves a single result from the list",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get Single Order",
+        "operationId": "getSingleOrders",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id to retrieve specific order details",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Orders response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "403": {
+            "description": "Forbidden, you are not allowed to undertake this operation"
+          },
+          "405": {
+            "description": "Method Not Allowed, likely url is not correct"
+          }
+        }
+      },
+      "put": {
+        "description": "This method will update a specific entry from Orders",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Update Orders",
+        "operationId": "updateOrders",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id to update the order",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Orders response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "403": {
+            "description": "Forbidden, you are not allowed to undertake this operation"
+          },
+          "405": {
+            "description": "Method Not Allowed, likely url is not correct"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "delete": {
+        "description": "This method will delete a specific entry from Orders",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Delete Orders",
+        "operationId": "deleteOrders",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "id to delete the order",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Orders response",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "403": {
+            "description": "Forbidden, you are not allowed to undertake this operation"
+          },
+          "405": {
+            "description": "Method Not Allowed, likely url is not correct"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ObjectId": {
+      "description": "http://www.mongodb.org/display/DOCS/Object+IDs",
+      "type": "string",
+      "title": "ObjectId is a unique ID identifying a BSON value. It must be exactly 12 bytes\nlong. MongoDB objects by default have such a property set in their \"_id\"\nproperty.",
+      "x-go-package": "gopkg.in/mgo.v2/bson"
+    },
+    "Product": {
+      "description": "Product model",
+      "type": "object",
+      "properties": {
+        "ID": {
+          "$ref": "#/definitions/ObjectId"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "OrderID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Price": {
+          "type": "number",
+          "format": "float"
+        },
+        "Quantity": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Status": {
+          "type": "boolean"
+        }
+      },
+      "x-go-package": "CrudWithMongoMgo"
+    }
+  }
+}
